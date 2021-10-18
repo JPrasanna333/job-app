@@ -12,7 +12,12 @@ import com.jobapp.model.Description;
  * @author PrasannaJ
  *
  */
-@Repository //This annotation is a DAOs (Data Access Object) that access the database directly. The repository does all the operations related to the database.
+
+/*
+ * This annotation is a DAOs (Data Access Object) that access the database
+ * directly. The repository does all the operations related to the database.
+ */
+@Repository
 public interface IDescriptionRepository extends JpaRepository<Description, Integer> {
 	@Query("from Description d inner join d.job j where j.jobName=?1")
 	List<Description> findDescriptionByJobName(String jobName);

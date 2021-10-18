@@ -23,14 +23,14 @@ public class DescriptionServiceImpl implements IDescriptionService {
 	}
 
 	@Override
-	public void addDescription(Description description) {
-		descriptionRepository.save(description);
+	public Description addDescription(Description description) {
+		return descriptionRepository.save(description);
 
 	}
 
 	@Override
-	public void updateDescription(Description description) {
-		descriptionRepository.save(description);
+	public Description updateDescription(Description description) {
+		return descriptionRepository.save(description);
 
 	}
 

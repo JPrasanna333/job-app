@@ -10,9 +10,9 @@ import com.jobapp.model.Company;
  */
 public interface ICompanyService {
 	// CRUD operation methods
-	void addCompany(Company Company);
+	Company addCompany(Company Company);
 
-	void updateCompany(Company company);
+	Company updateCompany(Company company);
 
 	Company getCompanyById(int companyId);
 

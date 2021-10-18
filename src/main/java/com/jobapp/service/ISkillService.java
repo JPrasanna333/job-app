@@ -10,9 +10,9 @@ import com.jobapp.model.Skills;
  */
 public interface ISkillService {
 	// CRUD Methods
-	void addSkills(Skills skill);
+	Skills addSkills(Skills skill);
 
-	void updateSkills(Skills skill);
+	Skills updateSkills(Skills skill);
 
 	void deleteSkills(int skillId);
 
@@ -22,8 +22,6 @@ public interface ISkillService {
 	List<Skills> getAllSkill();
 
 	List<Skills> getSkillsByJobName(String jobName);
-
-	List<Skills> getSkillBySkillName(String skillName);
 
 	List<Skills> getSkillByExperience(int experience);
 

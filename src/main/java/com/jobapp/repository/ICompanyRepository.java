@@ -12,7 +12,12 @@ import com.jobapp.model.Company;
  * @author PrasannaJ
  *
  */
-@Repository//This annotation is a DAOs (Data Access Object) that access the database directly. The repository does all the operations related to the database.
+
+/*
+ * This annotation is a DAOs (Data Access Object) that access the database
+ * directly. The repository does all the operations related to the database.
+ */
+@Repository
 public interface ICompanyRepository extends JpaRepository<Company, Integer> {
 	// derived queries
 	// public List<Company> findByJobsJobName(String jobName);

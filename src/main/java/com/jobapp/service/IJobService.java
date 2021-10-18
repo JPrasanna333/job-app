@@ -10,9 +10,9 @@ import com.jobapp.model.Job;
  */
 public interface IJobService {
 	// CRUD operation methods
-	void addJob(Job job);
+	Job addJob(Job job);
 
-	void updateJob(Job job);
+	Job updateJob(Job job);
 
 	Job getJobById(int jobId);
 

@@ -23,14 +23,14 @@ public class JobServiceImpl implements IJobService {
 	}
 
 	@Override
-	public void addJob(Job job) {
-		jobRepository.save(job);
+	public Job addJob(Job job) {
+		return jobRepository.save(job);
 
 	}
 
 	@Override
-	public void updateJob(Job job) {
-		jobRepository.save(job);
+	public Job updateJob(Job job) {
+		return jobRepository.save(job);
 
 	}
 

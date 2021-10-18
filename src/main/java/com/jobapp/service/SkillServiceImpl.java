@@ -23,14 +23,14 @@ public class SkillServiceImpl implements ISkillService {
 	}
 
 	@Override
-	public void addSkills(Skills skill) {
-		skillRepository.save(skill);
+	public Skills addSkills(Skills skill) {
+		return skillRepository.save(skill);
 
 	}
 
 	@Override
-	public void updateSkills(Skills skill) {
-		skillRepository.save(skill);
+	public Skills updateSkills(Skills skill) {
+		return skillRepository.save(skill);
 
 	}
 
@@ -64,15 +64,6 @@ public class SkillServiceImpl implements ISkillService {
 			throw new SkillNotFoundException("Skill was not found with the given job name..");
 		}
 		return SkillsByJobName;
-	}
-
-	@Override
-	public List<Skills> getSkillBySkillName(String skillName) {
-		List<Skills> SkillsBySkillName = skillRepository.findBySkillName(skillName);
-		if (SkillsBySkillName.isEmpty()) {
-			throw new SkillNotFoundException("Skill was not found with the given Skill name..");
-		}
-		return SkillsBySkillName;
 	}
 
 	@Override

@@ -10,9 +10,9 @@ import com.jobapp.model.Description;
  */
 public interface IDescriptionService {
 	// CRUD methods
-	void addDescription(Description description);
+	Description addDescription(Description description);
 
-	void updateDescription(Description description);
+	Description updateDescription(Description description);
 
 	Description getDescriptionById(int descriptionId);
 

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingPathVariableException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -23,7 +22,7 @@ import com.jobapp.model.ApiErrors;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-	
+	// Giving wrong http method name gives this exception
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -34,6 +33,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(status.value()).body(apiError);
 	}
 
+	/*
+	 * sending text data instead of sending json data to the http post() gives this
+	 * exception
+	 */
 	@Override
 	protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -55,16 +58,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@Override
-	protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		String message = ex.getMessage();
-		LocalDateTime timestamp = LocalDateTime.now();
-		String error = "Missing Request Parameters";
-		ApiErrors apiError = new ApiErrors(timestamp, message, status.value(), error);
-		return ResponseEntity.status(status).body(apiError);
-	}
-
-	@Override
 	protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 		String message = ex.getMessage();
@@ -72,6 +65,42 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		String error = "Type Mismatch";
 		ApiErrors apiError = new ApiErrors(timestamp, message, status.value(), error);
 		return ResponseEntity.status(status).body(apiError);
+	}
+
+	@ExceptionHandler(CompanyNotFoundException.class)
+	protected ResponseEntity<Object> handleCompanyNotFoundException(CompanyNotFoundException ex) {
+		String message = ex.getMessage();
+		LocalDateTime timestamp = LocalDateTime.now();
+		String error = "Company was not found";
+		ApiErrors apiError = new ApiErrors(timestamp, message, HttpStatus.BAD_REQUEST.value(), error);
+		return ResponseEntity.badRequest().body(apiError);
+	}
+
+	@ExceptionHandler(DescriptionNotFoundException.class)
+	protected ResponseEntity<Object> handleDescriptionNotFoundException(DescriptionNotFoundException ex) {
+		String message = ex.getMessage();
+		LocalDateTime timestamp = LocalDateTime.now();
+		String error = "Description was not found";
+		ApiErrors apiError = new ApiErrors(timestamp, message, HttpStatus.BAD_REQUEST.value(), error);
+		return ResponseEntity.badRequest().body(apiError);
+	}
+
+	@ExceptionHandler(JobNotFoundException.class)
+	protected ResponseEntity<Object> handleJobNotFoundException(JobNotFoundException ex) {
+		String message = ex.getMessage();
+		LocalDateTime timestamp = LocalDateTime.now();
+		String error = "Job was not found";
+		ApiErrors apiError = new ApiErrors(timestamp, message, HttpStatus.BAD_REQUEST.value(), error);
+		return ResponseEntity.badRequest().body(apiError);
+	}
+
+	@ExceptionHandler(SkillNotFoundException.class)
+	protected ResponseEntity<Object> handleSkillNotFoundException(SkillNotFoundException ex) {
+		String message = ex.getMessage();
+		LocalDateTime timestamp = LocalDateTime.now();
+		String error = "Skill was not found";
+		ApiErrors apiError = new ApiErrors(timestamp, message, HttpStatus.BAD_REQUEST.value(), error);
+		return ResponseEntity.badRequest().body(apiError);
 	}
 
 	@ExceptionHandler(RuntimeException.class)
