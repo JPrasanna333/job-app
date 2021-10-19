@@ -51,8 +51,11 @@ public class DescriptionController {
 	}
 
 	@PutMapping("/description")
-	public void updateCompany(@RequestBody Description description) {
-		descriptionService.updateDescription(description);
+	public ResponseEntity<Description> updateCompany(@RequestBody Description description) {
+		Description updatedDescription = descriptionService.updateDescription(description);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Description is updated");
+		return ResponseEntity.ok().headers(headers).body(updatedDescription);
 	}
 
 	@GetMapping("/description/description-id/{descriptionId}")
@@ -64,8 +67,11 @@ public class DescriptionController {
 	}
 
 	@GetMapping("/description")
-	public List<Description> getAllDescription() {
-		return descriptionService.getAllDescription();
+	public ResponseEntity<List<Description>> getAllDescription() {
+		List<Description> descriptionList = descriptionService.getAllDescription();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Got list of all description");
+		return ResponseEntity.ok().headers(headers).body(descriptionList);
 	}
 
 	@GetMapping("/description/job-name/{jobName}")
